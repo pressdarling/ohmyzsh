@@ -63,14 +63,18 @@ _alias_eza la   la
 _alias_eza ldot ld ".*"
 _alias_eza lD   lD
 _alias_eza lDD  lDa
+_alias_eza lit   "laT --git-ignore"
 _alias_eza ll   l
 _alias_eza ls
 _alias_eza lsd  d
 _alias_eza lsdl dl
-_alias_eza lS   "l -ssize"
-_alias_eza lT   "l -snewest"
+_alias_eza lsize   "l -ssize"
+_alias_eza lat   laT
+_alias_eza ltime   "l -snewest"
+
 
 unfunction _alias_eza
 unfunction _configure_eza
 unset _EZA_HEAD
 unset _EZA_TAIL
+
