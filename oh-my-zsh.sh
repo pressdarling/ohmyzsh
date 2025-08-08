@@ -121,7 +121,11 @@ if ! command grep -q -Fx "$zcompdump_revision" "$ZSH_COMPDUMP" 2>/dev/null \
   zcompdump_refresh=1
 fi
 
-if [[ "$ZSH_DISABLE_COMPFIX" != true ]]; then
+if [[ ! (( $zcompdump_refresh )) ]] \
+   && () { setopt local_options extendedglob; [[ -z "$ZSH_COMPDUMP"(#qN.mh+24) ]] }; then
+  # If the compdump was modified less than 24 hours ago, use the cached compdump, disable autodump
+  compinit -C -d "$ZSH_COMPDUMP" -D
+elif [[ "$ZSH_DISABLE_COMPFIX" != true ]]; then
   source "$ZSH/lib/compfix.zsh"
   # Load only from secure directories
   compinit -i -d "$ZSH_COMPDUMP"
