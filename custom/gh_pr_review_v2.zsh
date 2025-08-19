@@ -1,6 +1,6 @@
-# gh_pr_review: list unresolved review threads and comments since last commit
+# gh_pr_review_v2: list unresolved review threads and comments since last commit
 # Requires: gh, jq
-gh_pr_review() {
+gh_pr_review_v2() {
   emulate -L zsh
   set -o pipefail
 
@@ -21,16 +21,16 @@ gh_pr_review() {
       --include-resolved) include_resolved=1; shift ;;
       -h|--help)
         cat <<'EOF'
-Usage: gh_pr_review [threads|comments] [--owner X] [--repo Y] [--pr N]
+Usage: gh_pr_review_v2 [threads|comments] [--owner X] [--repo Y] [--pr N]
                     [--since ISO8601] [--include-resolved]
 
   threads   List review threads (default: unresolved only; add --include-resolved)
   comments  List review comments updated since last commit (or --since)
 
 Examples:
-  gh_pr_review threads
-  gh_pr_review comments --pr 123
-  gh_pr_review threads --owner foo --repo bar --pr 69
+  gh_pr_review_v2 threads
+  gh_pr_review_v2 comments --pr 123
+  gh_pr_review_v2 threads --owner foo --repo bar --pr 69
 EOF
         return 0;;
       *) print -u2 "Unknown arg: $1"; return 2;;
@@ -75,7 +75,7 @@ EOF
 }
 
 # List review threads (GraphQL) with pagination; default: unresolved only
-_ghpr_list_threads() {
+_ghpr_list_threads_v2() {
   emulate -L zsh; set -o pipefail
   local owner="$1" repo="$2" pr="$3" include_resolved="$4"
   local cursor="" has_next="true"
@@ -138,7 +138,7 @@ _ghpr_list_threads() {
 }
 
 # List review comments updated since last commit (REST)
-_ghpr_list_comments_since() {
+_ghpr_list_comments_since_v2() {
   emulate -L zsh; set -o pipefail
   local owner="$1" repo="$2" pr="$3" since="$4"
 

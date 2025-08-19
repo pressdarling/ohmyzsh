@@ -136,5 +136,5 @@ create_issue_from_file() {
   eval "$gh_command"
 }
 
-# --- Run the main function with all script arguments ---
-create_issue_from_file "$@"
+# # --- Run the main function with all script arguments ---
+# create_issue_from_file "$@"
